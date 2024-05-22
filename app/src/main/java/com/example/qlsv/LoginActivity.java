@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,12 +110,15 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("VOLLEY", String.valueOf(id));
 
                     if(username != null && password != null) {
+                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         LoginActivity.this.startActivity(intent);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("VOLLEY", "error");
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -122,6 +126,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 // method to handle errors
                 Log.d("VOLLEY", error.toString());
+
+                Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

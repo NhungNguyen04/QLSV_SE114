@@ -41,11 +41,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             return;
         }
 
-        holder.lecturer.setText(tkbClass.getLecturer());
-        holder.room.setText(tkbClass.getRoom());
+        holder.lecturer.setText("Giảng viên: " + tkbClass.getLecturer());
+        holder.room.setText("Phòng: " + tkbClass.getRoom());
         holder.courseName.setText(tkbClass.getCourseName());
-        holder.begin.setText(String.valueOf(tkbClass.getBegin()));
-        holder.end.setText(String.valueOf(tkbClass.getEnd()));
+        holder.begin.setText("Tiết bắt đầu: " + String.valueOf(tkbClass.getBegin()));
+        holder.end.setText(String.valueOf("Tiết kết thúc: " + tkbClass.getEnd()));
     }
 
     @Override

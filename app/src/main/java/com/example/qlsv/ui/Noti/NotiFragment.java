@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,9 @@ public class NotiFragment extends Fragment {
     private RecyclerView rcv;
     private NotiAdapter notiAdapter;
     private Context mContext;
+
+
+    private ProgressBar progressBar;
     List<Noti> list;
 
     @Override
@@ -73,6 +77,7 @@ public class NotiFragment extends Fragment {
 
         rcv = root.findViewById(R.id.noti_rcv);
         list  = new ArrayList<>();
+        progressBar = root.findViewById(R.id.noti_loading);
         getList();
 
         return root;
@@ -109,6 +114,8 @@ public class NotiFragment extends Fragment {
 
                     }
                     buildRcv();
+                    rcv.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
 
 
                 } catch (JSONException e) {

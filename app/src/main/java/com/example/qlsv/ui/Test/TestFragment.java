@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,7 @@ public class TestFragment extends Fragment {
     private Context mContext;
     private List<Test> testList;
     private AppCompatButton searchBtn;
-
+    private ProgressBar progressBar;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -98,7 +99,7 @@ public class TestFragment extends Fragment {
         testList = new ArrayList<>();
         rcv1 = root.findViewById(R.id.rcv1);
         searchBtn = root.findViewById(R.id.searchbtn);
-
+        progressBar = root.findViewById(R.id.test_loading);
 
         searchBtn.setOnClickListener(v -> {
 
@@ -122,7 +123,8 @@ public class TestFragment extends Fragment {
 
 
     private void getList(String hocKi, String namHoc) {
-
+        rcv1.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         User user = new User();
         testList.clear();
 
@@ -161,7 +163,8 @@ public class TestFragment extends Fragment {
                         testList.add(new Test(date,time,courseName,room));
                     }
                     buildRcv();
-
+                    rcv1.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E5EDF1"
     tools:context=".ui.Test.TestFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,8 +45,17 @@
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv1"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp" />
+
+    <ProgressBar
+        android:id="@+id/test_loading"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

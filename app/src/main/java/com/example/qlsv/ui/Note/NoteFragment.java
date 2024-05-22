@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,8 @@ public class NoteFragment extends Fragment implements RecyclerViewInterface {
     private Context mContext;
     private List<Note> list;
 
+    private ProgressBar progressBar;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -76,6 +79,7 @@ public class NoteFragment extends Fragment implements RecyclerViewInterface {
 //        noteViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         list = new ArrayList<>();
         rcv = root.findViewById(R.id.rcv2);
+        progressBar = root.findViewById(R.id.note_loading);
         getList();
 
         refreshBtn.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +100,8 @@ public class NoteFragment extends Fragment implements RecyclerViewInterface {
 
 
         list.clear();
+        progressBar.setVisibility(View.VISIBLE);
+        rcv.setVisibility(View.GONE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/note/getnotesbyuser/{0}", User.getId());
@@ -117,7 +123,8 @@ public class NoteFragment extends Fragment implements RecyclerViewInterface {
                         list.add(new Note(id,title,date,content));
                     }
                     buildRcv();
-
+                    rcv.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

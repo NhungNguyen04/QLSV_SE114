@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class ScoreFragment extends Fragment {
     private TableLayout tbLayout;
     private FragmentScoreBinding binding;
 
+    private ProgressBar progressBar;
+
     private int majorTotalCredits = 0;
 
     @Override
@@ -96,7 +99,7 @@ public class ScoreFragment extends Fragment {
         totalScore = root.findViewById(R.id.totalscore);
         accumulatedScore = root.findViewById(R.id.accumulatedscore);
 
-
+        progressBar = root.findViewById(R.id.score_loading);
         accumulatedCredits.setText("Tổng số tín chỉ tích lũy: " + String.valueOf(User.getAccumulatedCredits()));
         totalScore.setText("Điểm trung bình: " + String.valueOf(User.getTotalScore()));
         accumulatedScore.setText("Điểm trung bình tích lũy: " + String.valueOf(User.getAccumulatedScore()));
@@ -108,7 +111,6 @@ public class ScoreFragment extends Fragment {
                 autoCompleteTextView.setAdapter(adapterList);
                 autoCompleteTextView1.setAdapter(adapterList1);
                 tbLayout = new TableLayout(getActivity());
-                init();
                 layout.removeAllViews();
                 layout.addView(tbLayout);
 
@@ -139,7 +141,7 @@ public class ScoreFragment extends Fragment {
     }
 
     private void getList(String hocKi, String namHoc) {
-
+        progressBar.setVisibility(View.VISIBLE);
         switch(hocKi) {
             case "Học kì 1":
                 hocKi = "1";
@@ -160,6 +162,8 @@ public class ScoreFragment extends Fragment {
             public void onResponse(JSONArray response) {
 
                 try {
+                    progressBar.setVisibility(View.GONE);
+                    init();
                     for(int i = 0; i < response.length(); i++){
                         JSONObject responseObj = response.getJSONObject(i);
                         String maMh = responseObj.getString("maMh");
@@ -197,7 +201,7 @@ public class ScoreFragment extends Fragment {
         TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
 //        lp.setMargins(16,16,16,16);
 //        tbLayout.setLayoutParams(lp);
-        tbLayout.setPadding(0,16,0,16);
+        tbLayout.setPadding(16,16,16,16);
 
         TableRow tbRow = new TableRow(getActivity());
         tbRow.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_bottom));
@@ -253,7 +257,6 @@ public class ScoreFragment extends Fragment {
     private void build(String maMH, String maLop, int tc, double qt, double th, double gk, double ck, double average){
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setPadding(0,0,0,16);
-        tableRow.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_bottom));
 
 
         TextView maMHTV = new TextView(getActivity());
@@ -314,7 +317,7 @@ public class ScoreFragment extends Fragment {
 
     public void getMajor(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = "http://10.45.141.207:3333/api/major/detailmajor/" + User.getMajorId();
+        String URL = "https://qlsv-api.onrender.com/api/major/detailmajor/" + User.getMajorId();
 
         Log.d("SCORE", URL);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

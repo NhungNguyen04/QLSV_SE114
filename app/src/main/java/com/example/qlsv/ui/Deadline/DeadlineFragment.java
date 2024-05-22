@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -68,11 +69,14 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
     private @NonNull FragmentDeadlineBinding binding;
     private String[] list = {"Học kì 1", "Học kì 2", "Học kì hè"};
     private String[] schoolYear = {"2020-2021","2021-2022","2022-2023"};
-    private List<String> exerciseList = new ArrayList<>();
+    private List<String> completedList = new ArrayList<>();
+    private List<String> unCompletedList = new ArrayList<>();
     private RecyclerView rcv;
     private DeadlineAdapter deadlineAdapter;
     private Context mContext;
     private List<Deadline> deadlineList;
+
+    private ProgressBar progressBar;
 
     private HashMap<String,String> pdfList = new HashMap<>();
 
@@ -109,8 +113,8 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
         autoCompleteTextView3 = getActivity().findViewById(R.id.deadline_auto_complete_tv3);
         adapterList = new ArrayAdapter<String>(this.getContext(),R.layout.test_item,list);
         adapterList1 = new ArrayAdapter<String>(this.getContext(), R.layout.test_item, schoolYear);
-        adapterList2 = new ArrayAdapter<String>(this.getContext(),R.layout.test_item,exerciseList);
-        adapterList3 = new ArrayAdapter<String>(this.getContext(), R.layout.test_item, exerciseList);
+        adapterList2 = new ArrayAdapter<String>(this.getContext(),R.layout.test_item,unCompletedList);
+        adapterList3 = new ArrayAdapter<String>(this.getContext(), R.layout.test_item, completedList);
         autoCompleteTextView.setAdapter(adapterList);
         autoCompleteTextView1.setAdapter(adapterList1);
         autoCompleteTextView2.setAdapter(adapterList2);
@@ -127,6 +131,7 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
 
         deadlineList = new ArrayList<>();
         rcv = root.findViewById(R.id.rcv3);
+        progressBar = root.findViewById(R.id.deadline_loading);
 
 
 
@@ -215,7 +220,7 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
                         HashMap<String,Object> datas = (HashMap<String, Object>) dsp.getValue();
                         id = Objects.requireNonNull(datas.get("id")).toString();
                         pdfUrl = Objects.requireNonNull(datas.get("pdf")).toString();
-
+                        Log.d("HEOCON", pdfUrl);
                         pdfList.put(id, pdfUrl);
                     }
 
@@ -309,8 +314,11 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
 
     private void getList(String hocKi, String namHoc) {
 
-//        list.add(new Test("Ngày: 30/04/2004", "Thời gian: Ca 1", "Môn học: Nhập môn lập trình", "Phòng: B6.02"));
+        progressBar.setVisibility(View.VISIBLE);
+        rcv.setVisibility(View.GONE);
         deadlineList.clear();
+        adapterList2.clear();
+        adapterList3.clear();
 
         switch(hocKi) {
             case "Học kì 1":
@@ -348,8 +356,12 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
 
 
                         deadlineList.add(new Deadline(maLop,title,date,state,completedText,id));
-                        exerciseList.add(title);
+                        if (completed == 0) {
+                            unCompletedList.add(title);
+                        } else completedList.add(title);
                     }
+                    progressBar.setVisibility(View.GONE);
+                    rcv.setVisibility(View.VISIBLE);
                     adapterList2.notifyDataSetChanged();
                     adapterList3.notifyDataSetChanged();
                     buildRcv();

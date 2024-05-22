@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -40,6 +41,8 @@ public class fragment2 extends Fragment {
     private ClassAdapter classAdapter;
     private Context mContext;
     private List<TKBClass> list;
+
+    private ProgressBar progressBar;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -90,8 +93,8 @@ public class fragment2 extends Fragment {
                 case 8:
                 case 10:
                 case 12:
-                    endDayOfWeek = (date - startDayOfWeek + 6) % 31;
-                    if (date - startDayOfWeek + 6 > 31) {
+                    endDayOfWeek = (date - startDayOfWeek + 5) % 31;
+                    if (date - startDayOfWeek + 5 > 31) {
                         ++nextMonth;
                     }
                     break;
@@ -99,8 +102,8 @@ public class fragment2 extends Fragment {
                 case 6:
                 case 9:
                 case 11:
-                    endDayOfWeek = (date - startDayOfWeek + 6) % 30;
-                    if (date - startDayOfWeek + 6 > 30) {
+                    endDayOfWeek = (date - startDayOfWeek + 5) % 30;
+                    if (date - startDayOfWeek + 5 > 30) {
                         ++nextMonth;
                     }
                     break;
@@ -113,6 +116,7 @@ public class fragment2 extends Fragment {
         View view = inflater.inflate(R.layout.tkb_fragment2, container, false);
         rcv = view.findViewById(R.id.frag2_rcv);
         list = new ArrayList<>();
+        progressBar = view.findViewById(R.id.tkb_fragment2_loading);
 
 
         DayScrollDatePicker mPicker = (DayScrollDatePicker) view.findViewById(R.id.day_date_picker);
@@ -136,7 +140,8 @@ public class fragment2 extends Fragment {
 
         User user = new User();
         list.clear();
-
+        rcv.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/class/allclassesbyid/{0}?dow={1}", user.getId(), dow);
@@ -157,6 +162,8 @@ public class fragment2 extends Fragment {
                         list.add(new TKBClass(lecturer,courseName,room,begin,end));
                     }
                     buildRcv();
+                    rcv.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
 
 
                 } catch (JSONException e) {
