@@ -270,7 +270,7 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
 
     private void submitDeadline(int id){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/deadline/submitdeadline/{0}", id);
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/deadline/submitdeadline/{0}", id);
 
         StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
             @Override
@@ -335,7 +335,7 @@ public class DeadlineFragment extends Fragment implements RecyclerViewInterface 
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/deadline/deadlinebysemester/{0}?hocKi={1}&namHoc={2}", User.getId(), hocKi, namHoc);
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/deadline/deadlinebysemester/{0}?hocKi={1}&namHoc={2}", User.getId(), hocKi, namHoc);
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

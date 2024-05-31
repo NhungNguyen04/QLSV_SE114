@@ -104,7 +104,7 @@ public class NoteFragment extends Fragment implements RecyclerViewInterface {
         rcv.setVisibility(View.GONE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/note/getnotesbyuser/{0}", User.getId());
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/note/getnotesbyuser/{0}", User.getId());
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

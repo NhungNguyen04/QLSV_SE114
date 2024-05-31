@@ -75,7 +75,7 @@ public class NoteActivity extends AppCompatActivity {
 
     private void createNote(){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "https://qlsv-api.onrender.com/api/note/createnote";
+        String URL = "https://qlsv-server-2.onrender.com/api/note/createnote";
 
 
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -125,7 +125,7 @@ public class NoteActivity extends AppCompatActivity {
     }
     private void updateNote(int idNote){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "https://qlsv-api.onrender.com/api/note/editnote/" + idNote;
+        String URL = "https://qlsv-server-2.onrender.com/api/note/editnote/" + idNote;
 
 
         StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {

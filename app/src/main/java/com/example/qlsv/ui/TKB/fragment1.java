@@ -71,12 +71,13 @@ public class fragment1 extends Fragment {
 
         Calendar cal = Calendar.getInstance();
         int date = cal.get(Calendar.DAY_OF_WEEK);
+        Log.d("date", String.valueOf(date));
         Log.d("TKB", String.valueOf(date));
         User user = new User();
         Log.d("TKB", String.valueOf(user.getId()));
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/class/allclassesbyid/{0}?dow={1}", user.getId(), date);
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/class/allclassesbyid/{0}?dow={1}", user.getId(), date);
 
         Log.d("TKB", URL);
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {

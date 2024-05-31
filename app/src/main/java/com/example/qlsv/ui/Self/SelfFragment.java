@@ -155,7 +155,7 @@ public class SelfFragment extends Fragment {
 
     private void getUser() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/user/detailuser/{0}", User.getId());
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/user/detailuser/{0}", User.getId());
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void login(String username, String password){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String URL = "https://qlsv-api.onrender.com/api/user/login";
+        String URL = "https://qlsv-server-2.onrender.com/api/user/login";
 
 
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     // on below line we are parsing the response
                     // to json object to extract data from it.
                     JSONObject respObj = new JSONObject(response);
+                    Log.d("connect", "connected");
 
                     // below are the strings which we
                     // extract from our json object.
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     String address = respObj.getString("address");
                     int accumulatedCredits = respObj.getInt("accumulatedCredits");
                     double totalScore = respObj.getDouble("totalScore");
-                    double accumulatedScore = respObj.getDouble("accumlatedScore");
+                    double accumulatedScore = respObj.getDouble("accumulatedScore");
                     int majorId = respObj.getInt("majorId");
                     String className = respObj.getString("class");
                     new User(id, username, password, email, birthday, address, accumulatedCredits, totalScore, accumulatedScore, className, majorId);

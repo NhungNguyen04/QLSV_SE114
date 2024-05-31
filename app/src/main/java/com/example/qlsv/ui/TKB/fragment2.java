@@ -144,7 +144,7 @@ public class fragment2 extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/class/allclassesbyid/{0}?dow={1}", user.getId(), dow);
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/class/allclassesbyid/{0}?dow={1}", user.getId(), dow);
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

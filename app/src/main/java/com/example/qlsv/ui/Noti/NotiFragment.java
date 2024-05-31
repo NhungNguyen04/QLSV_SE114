@@ -90,7 +90,7 @@ public class NotiFragment extends Fragment {
         Log.d("ASDASDASD", "List Clear");
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/noti/getnotibyid/{0}", User.getId());
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/noti/getnotibyid/{0}", User.getId());
         Log.d("ASDASDASD", URL);
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

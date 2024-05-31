@@ -155,7 +155,7 @@ public class ScoreFragment extends Fragment {
         }
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = MessageFormat.format("https://qlsv-api.onrender.com/api/class/getscorebysemester/{0}?hocKi={1}&namHoc={2}", User.getId(), hocKi, namHoc);
+        String URL = MessageFormat.format("https://qlsv-server-2.onrender.com/api/class/getscorebysemester/{0}?hocKi={1}&namHoc={2}", User.getId(), hocKi, namHoc);
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -317,7 +317,7 @@ public class ScoreFragment extends Fragment {
 
     public void getMajor(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String URL = "https://qlsv-api.onrender.com/api/major/detailmajor/" + User.getMajorId();
+        String URL = "https://qlsv-server-2.onrender.com/api/major/detailmajor/" + User.getMajorId();
 
         Log.d("SCORE", URL);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
