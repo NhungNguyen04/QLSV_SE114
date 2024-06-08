@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "907146998737",
-    "firebase_url": "https://se114-ae2cf-default-rtdb.firebaseio.com",
-    "project_id": "se114-ae2cf",
-    "storage_bucket": "se114-ae2cf.appspot.com"
+    "project_number": "187373871331",
+    "firebase_url": "https://qlsv-40138-default-rtdb.firebaseio.com",
+    "project_id": "qlsv-40138",
+    "storage_bucket": "qlsv-40138.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:907146998737:android:2a5925d336979b5bc3a6f0",
+        "mobilesdk_app_id": "1:187373871331:android:24337cf59dd4c8f2f3a5d6",
         "android_client_info": {
           "package_name": "com.example.qlsv"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAPuauLomjuXl2TPrhI346ErpxSbNuzGpc"
+          "current_key": "AIzaSyDYtb67MIRk_3Bq3r76N5tX1ANmzPJeW0E"
         }
       ],
       "services": {
